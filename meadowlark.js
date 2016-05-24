@@ -4,6 +4,8 @@
 var express = require('express');
 var app = express();
 
+var fortune = require('./lib/fortune.js');
+
 var fortunes = [
     "Conquer your fears or they will conquer you.",
     "Rivers need springs.",
@@ -26,8 +28,7 @@ app.get('/', function(req, res) {
 });
 app.get('/about', function(req, res) {
 
-    var randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)];
-    res.render('about',{fortune: randomFortune});
+    res.render('about',{fortune: fortune.getFortune()});
 });
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next){
